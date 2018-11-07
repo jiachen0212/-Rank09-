@@ -1,0 +1,39 @@
+#coding=utf-8
+import tifffile as tiff
+import scipy.misc as misc
+import os
+import cv2
+import numpy as np
+from sklearn import preprocessing
+file15 = '/home/lenovo/2Tdisk/Wkyao/_/20171105_quarterfinals/quarterfinals_2015.tif'
+file17 = '/home/lenovo/2Tdisk/Wkyao/_/20171105_quarterfinals/quarterfinals_2017.tif'
+img15 = tiff.imread(file15).transpose([1, 2, 0])
+img15 = img15[:,:,3]
+img17 = tiff.imread(file17).transpose([1, 2, 0])
+img17 = img17[:,:,3]
+
+New_2015 = preprocessing.scale(img15)
+New_2015 = New_2015.astype(np.float)
+New_2017 = preprocessing.scale(img17)
+New_2017 = New_2017.astype(np.float16)
+
+sub = New_2017 - New_2015
+size = sub.shape
+# for i in range(size[0]):
+#     for j in range(size[1]):
+#         if sub[i, j] != -73.9524:
+#             print sub[i, j]
+#print sub
+np.save('/home/lenovo/2Tdisk/Wkyao/_/juesai/test.npy', sub)
+
+
+
+
+
+
+
+
+
+
+
+
